@@ -1,0 +1,305 @@
+mapping = "hirom"
+symbol_prefix = "hard_battle"
+sha256 = "adda722eb5976ddee409466c59016bdaf30b9772bc577ef42c033704e1c0c91c"
+# Cartridge assertions and routes outside the first single-player preview.
+boot_checkpoints = [0xC00033, 0xC013DA, 0xC01CB9, 0xC068E4, 0xC08C06, 0xC0903D, 0xC097C7, 0xC09812, 0xC0985D]
+
+[[conditional_checkpoints]]
+address = 0xC005BC
+wram_offset = 0x03F6
+value = 15
+
+[[conditional_checkpoints]]
+address = 0xC00247
+wram_offset = 0x03F6
+value = 15
+
+[[interrupt_entries]]
+address = 0x00FF70
+
+[[interrupt_returns]]
+address = 0x00FF96
+target = 0xC004A8
+status = 0
+
+[[stack_dispatches]]
+address = 0xC0018E
+targets = [
+    0xC0344F, 0xC03476, 0xC03713,
+    0xC063FC, 0xC0643C, 0xC064D6, 0xC068E4,
+    0xC069FE, 0xC06ABB, 0xC06AF7, 0xC06B53, 0xC06CB5,
+    0xC06DA6, 0xC06EB6, 0xC06F61, 0xC06F8C,
+    0xC093D3, 0xC09435, 0xC0944D, 0xC09483, 0xC095BB, 0xC095D3, 0xC09673, 0xC09693, 0xC09724,
+    0xC0A6DA, 0xC0A75F, 0xC0A769, 0xC0A773, 0xC0A77D, 0xC0A787, 0xC0A7E7, 0xC0A883,
+    0xC0A96B, 0xC0A97A, 0xC0A98A, 0xC0A99B, 0xC0AA2D, 0xC0AA37, 0xC0AA51, 0xC0AA5B,
+    0xC0AE16, 0xC0AE34, 0xC0AEF3, 0xC0AF84,
+    0xC0B460, 0xC0B4E7, 0xC0B548, 0xC0B717, 0xC0B73E, 0xC0B763,
+]
+return_address = 0xC0018F
+
+[[stack_dispatches]]
+address = 0x00FF93
+targets = [0xC0053D, 0xC005A4, 0xC00600, 0xC0988B]
+return_address = 0x00FF94
+
+[[stack_dispatches]]
+address = 0xC0053C
+targets = [0x00FF94]
+
+[[stack_dispatches]]
+address = 0xC00583
+targets = [0xC00195]
+reset_returns = true
+
+[[stack_dispatches]]
+address = 0xC0050E
+targets = [0xC037F7]
+return_address = 0xC004A8
+reset_returns = true
+
+[[stack_dispatches]]
+address = 0xC0210C
+targets = [0xC00F20, 0xC0649E]
+return_address = 0xC0210D
+
+[[stack_dispatches]]
+address = 0xC0212F
+targets = [0xC00F20]
+return_address = 0xC02130
+
+[[stack_dispatches]]
+address = 0xC0203A
+targets = [0xC03822, 0xC0738C, 0xC07438, 0xC098A9, 0xC0AFF9, 0xC0B00A]
+return_address = 0xC0203B
+
+[[stack_dispatches]]
+address = 0xC0205D
+targets = [0xC03843]
+return_address = 0xC0205E
+
+[[stack_dispatches]]
+address = 0xC020C6
+targets = [0xC03AAD]
+return_address = 0xC020C7
+
+[[stack_dispatches]]
+address = 0xC020E9
+targets = [0xC03AFF]
+return_address = 0xC020EA
+
+[[indexed_jumps]]
+address = 0xC007ED
+indices = [0x06, 0x0C, 0x0E]
+return_address = 0xC007D3
+
+[[indexed_jumps]]
+address = 0xD3C221
+indices = [0, 0x02, 0x10, 0x12]
+
+[[indexed_jumps]]
+address = 0xC0969D
+indices = [0, 2]
+
+[[indexed_jumps]]
+address = 0xC0970B
+indices = [0, 2, 4, 6]
+
+[[stack_dispatches]]
+# The title decompresses the cartridge's graphics through these callbacks.
+address = 0xC05ACE
+targets = [0xC05B0B, 0xC061FF, 0xC0627E]
+return_address = 0xC05ACF
+
+[[stack_dispatches]]
+address = 0xC0B3E8
+targets = [0xC0B354]
+return_address = 0xC0B3E9
+
+[[stack_dispatches]]
+address = 0xC0B363
+targets = [0xC09D07, 0xC09D26, 0xC09DEC, 0xC09D91]
+return_address = 0xC0B385
+non_recursive = true
+
+[[indexed_jumps]]
+# Opening story script commands.
+address = 0xC0B505
+indices = [8, 0x0A, 0x0E, 0x10, 0x14, 0x16, 0x1C, 0x1E, 0x20, 0x22]
+
+[[stack_dispatches]]
+address = 0xC0B631
+targets = [0xC0B7B3, 0xC0B7B6, 0xC0B9B8, 0xC0B9BB, 0xC0BB29, 0xC0BB58, 0xC0BF51]
+
+[[stack_dispatches]]
+address = 0xC0B7AE
+targets = [0xC088D8]
+return_address = 0xC0B7AF
+
+[[stack_dispatches]]
+address = 0xC0B7A3
+targets = [0xC02066, 0xC02089, 0xC020F2, 0xC033E6, 0xC03407]
+return_address = 0xC0B7AF
+
+[[stack_dispatches]]
+address = 0xC02080
+targets = [
+    0xC06D8D, 0xC06DA2, 0xC07107, 0xC076C3, 0xC076D8, 0xC0AFDF,
+    0xC0BB48, 0xC0BB6B, 0xC0BFDB, 0xC0BFF9, 0xC0C00A,
+]
+return_address = 0xC02081
+
+[[stack_dispatches]]
+address = 0xC020A3
+targets = [0xC02DF9, 0xC08915, 0xC08977]
+return_address = 0xC020A4
+
+[[stack_dispatches]]
+# Character selection initializes its graphics through the scene table.
+address = 0xC06E5F
+targets = [0xC06FBA]
+return_address = 0xC06E60
+
+[[stack_dispatches]]
+address = 0xC07412
+targets = [0xC07417]
+return_address = 0xC07413
+
+[[stack_dispatches]]
+address = 0xC02152
+targets = [0xC02FC8, 0xC02FF2, 0xC03022, 0xC03061, 0xC07193, 0xC0B113]
+return_address = 0xC02153
+
+[[stack_dispatches]]
+address = 0xC0719D
+targets = [0xC071D0]
+return_address = 0xC0719E
+
+[[preview_accumulator_overrides]]
+# Use the same first-match lineup as the USA preview when selecting Ranma.
+address = 0xC0A9B0
+wram_offset = 0x0D14
+wram_value = 0
+value = 0x0018
+
+[[stack_dispatches]]
+# Akane's arena supplies its own initialization and animation callbacks.
+address = 0xC077F5
+targets = [0xC080D9]
+return_address = 0xC08626
+
+[[stack_dispatches]]
+address = 0xC078B0
+targets = [0xC080F3]
+
+[[stack_dispatches]]
+address = 0xC03080
+targets = [0xC030B1, 0xC08B5F]
+return_address = 0xC03081
+
+[[stack_dispatches]]
+address = 0xC03093
+targets = [0xC030C6, 0xC08B8C]
+return_address = 0xC03094
+
+[[stack_dispatches]]
+address = 0xC01BBC
+targets = [0xC01BD0, 0xC01DEE]
+
+[[indexed_jumps]]
+address = 0xC01CBD
+indices = [0, 2, 4, 6, 8, 10, 12]
+return_addresses = [0xC01C07, 0xC01E25]
+
+[[indexed_jumps]]
+address = 0xC03932
+indices = [0, 2, 4]
+
+[[indexed_jumps]]
+address = 0xC03163
+indices = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28]
+
+[[indexed_jumps]]
+address = 0xC03283
+indices = [0, 2]
+
+[[indexed_jumps]]
+address = 0xC03307
+indices = [0, 2]
+
+[[indexed_jumps]]
+address = 0xC03375
+indices = [0, 2, 4]
+
+[[indexed_jumps]]
+address = 0xC02A4C
+indices = [0, 2, 4]
+
+[[indexed_jumps]]
+address = 0xC02ADC
+indices = [0, 2, 4]
+
+[[indexed_jumps]]
+address = 0xC02BC7
+indices = [0, 2, 4, 6]
+
+[[indexed_jumps]]
+address = 0xC02C91
+indices = [0, 2, 4, 6]
+
+[[stack_dispatches]]
+# First-frame and repeated fighter updates.
+address = 0xC00C8F
+targets = [
+    0xC00F61, 0xC00F8E, 0xC029C6, 0xC03D4E, 0xC03D56, 0xC03D5E, 0xC03D8A, 0xC03D92, 0xC03D9A, 0xC03DAA,
+    0xC03DB2, 0xC03DBA,
+    0xC03E10, 0xC03E2A, 0xC03E44, 0xC03E5E, 0xC03E7B, 0xC03E98, 0xC03EC0, 0xC03EDD, 0xC03EED,
+    0xC03F08, 0xC03F22, 0xC03F3C,
+    0xC04B27, 0xC04B2F, 0xC04B37, 0xC04B63, 0xC04B6B, 0xC04B73, 0xC04B83, 0xC04B8B, 0xC04B93, 0xC04B9B, 0xC04BB5,
+    0xC04BCF, 0xC04BE9, 0xC04C1D, 0xC04C54, 0xC04C71, 0xC04C99, 0xC04CB6, 0xC04CCE, 0xC04D06,
+]
+return_address = 0xC00C90
+
+[[stack_dispatches]]
+address = 0xC00C9F
+targets = [
+    0xC00F61, 0xC029FF, 0xC03D52, 0xC03D5A, 0xC03D62, 0xC03D8E, 0xC03D96, 0xC03DAE, 0xC03DB6, 0xC03DBE,
+    0xC03E26, 0xC03E40, 0xC03E5A, 0xC03E77, 0xC03E94, 0xC03EB1, 0xC03ED9, 0xC03EE1, 0xC03EF1,
+    0xC03F1E, 0xC03F38, 0xC03F52,
+    0xC04B2B, 0xC04B33, 0xC04B3B, 0xC04B67, 0xC04B6F, 0xC04B87, 0xC04B8F, 0xC04B97, 0xC04BB1, 0xC04BCB,
+    0xC04BE5, 0xC04BFF, 0xC04C33, 0xC04C6D, 0xC04C8A, 0xC04CB2, 0xC04CBA, 0xC04CE4, 0xC04D1C,
+]
+return_address = 0xC00CA0
+
+[[stack_dispatches]]
+address = 0xC00F8D
+targets = [0xC03E10, 0xC04BCF, 0xC04BE9]
+
+[[stack_dispatches]]
+address = 0xC0298F
+targets = [0xC029C6, 0xC02A41, 0xC02AC7, 0xC02B89, 0xC02BBC, 0xC02C86, 0xC04CE8, 0xC04D20]
+return_address = 0xC0298F
+allow_direct_return = true
+
+[[stack_dispatches]]
+address = 0xC029A2
+targets = [0xC029FF, 0xC02A47, 0xC02AD7, 0xC02B8F, 0xC02BC2, 0xC02C8C, 0xC04CEE, 0xC04D29]
+return_address = 0xC029A2
+allow_direct_return = true
+
+[[stack_dispatches]]
+# Akane's computer opponent dispatches actions from the cartridge script.
+address = 0xC08C13
+targets = [
+    0xC08D62, 0xC08D63, 0xC08D64, 0xC08D6A, 0xC08D74, 0xC08D88, 0xC08DA0, 0xC08DAD,
+    0xC08DC7, 0xC08DCF, 0xC08DE2, 0xC08DF4, 0xC08E06, 0xC08E16, 0xC08E26, 0xC08E3F, 0xC08E66,
+    0xC08E8D, 0xC08E99, 0xC08EB9, 0xC08EC5, 0xC08EE5, 0xC08EFF, 0xC08F19, 0xC08F22, 0xC08F39,
+    0xC08F42, 0xC08F59, 0xC08F79, 0xC08F99, 0xC08FA8, 0xC08FB2, 0xC08FB9, 0xC08FD7,
+    0xC08FF8, 0xC09019, 0xC09021, 0xC09026,
+]
+return_address = 0xC08C14
+
+[[stack_dispatches]]
+address = 0xC09384
+targets = [0xC0344F, 0xC03476, 0xC03713, 0xC0A7E7, 0xC0A883]
+return_address = 0xC0018F
+reset_returns = true

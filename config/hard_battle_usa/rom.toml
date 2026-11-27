@@ -1,0 +1,365 @@
+mapping = "hirom"
+symbol_prefix = "hard_battle"
+sha256 = "32d32ef56af83887cdc2c04b3da4be1cd82a473988deaa2e7dd50d38ef79c3a1"
+# Stop at the next opponent or on alternate paths and cartridge assertions.
+boot_checkpoints = [
+    0xC00033, 0xC013BF, 0xC01C9E,
+    0xC06303, 0xC067D3, 0xC06979, 0xC09750, 0xC09B87, 0xC0A30F, 0xC0A35A, 0xC0A3A5, 0xC0BEBF,
+]
+
+[[conditional_checkpoints]]
+address = 0xC005A1
+wram_offset = 0x03F6
+value = 15
+
+[[conditional_checkpoints]]
+address = 0xC0022C
+wram_offset = 0x03F6
+value = 15
+
+[[preview_accumulator_overrides]]
+# Select the original lineup that starts with Akane when previewing Ranma's first match.
+address = 0xC068A8
+wram_offset = 0x0D14
+wram_value = 0
+value = 0x0018
+
+[[preview_accumulator_overrides]]
+# The unclocked diagnostics path skips waits for the first match's announcer.
+address = 0xC03938
+wram_offset = 0x0072
+wram_value = 9
+value = 0
+silent_only = true
+
+[[preview_accumulator_overrides]]
+address = 0xC03968
+wram_offset = 0x0072
+wram_value = 9
+value = 0
+silent_only = true
+
+[[preview_accumulator_overrides]]
+address = 0xC0399C
+wram_offset = 0x0072
+wram_value = 9
+value = 0
+silent_only = true
+
+[[preview_accumulator_overrides]]
+address = 0xC039CB
+wram_offset = 0x0072
+wram_value = 9
+value = 0
+silent_only = true
+
+[[interrupt_entries]]
+address = 0x00FF70
+
+[[interrupt_returns]]
+address = 0x00FF96
+target = 0xC0048D
+status = 0
+
+[[stack_dispatches]]
+# The scheduler switches to its worker using the IRQ return trampoline.
+address = 0xC00521
+targets = [0x00FF94]
+
+[[stack_dispatches]]
+# The title menu and character screen install their callbacks in scheduler slot 2.
+address = 0xC0201F
+targets = [0xC037FB, 0xC06EE0, 0xC0A3FA, 0xC07ED4, 0xC07F80]
+return_address = 0xC02020
+
+[[stack_dispatches]]
+# The second fighter runs in the next scheduler slot.
+address = 0xC02042
+targets = [0xC0381C]
+return_address = 0xC02043
+
+[[stack_dispatches]]
+# This slot animates the 1P dialogue, the confirmed character, and Ranma's cutscene.
+address = 0xC02065
+targets = [0xC06EC6, 0xC06F8A, 0xC06FFA, 0xC078D5, 0xC078EA, 0xC07C4F, 0xC0820B, 0xC08220, 0xC0B985, 0xC0B9A8, 0xC0BE18, 0xC0BE36, 0xC0BE47]
+return_address = 0xC02066
+
+[[stack_dispatches]]
+# The 1P script installs a callback after its first timed sequence.
+address = 0xC02088
+targets = [0xC02DDE, 0xC078D5, 0xC078EA, 0xC0820B, 0xC08220, 0xC0945E, 0xC094BC]
+return_address = 0xC02089
+
+[[stack_dispatches]]
+# The match creates the fighter's auxiliary object in this slot.
+address = 0xC020AB
+targets = [0xC03A86]
+return_address = 0xC020AC
+
+[[stack_dispatches]]
+address = 0xC020CE
+targets = [0xC03AD8]
+return_address = 0xC020CF
+
+[[stack_dispatches]]
+# The opening scene's fade task updates the display brightness.
+address = 0xC020F1
+targets = [0xC00F05, 0xC062CB]
+return_address = 0xC020F2
+
+[[stack_dispatches]]
+# The IRQ trampoline reads the selected raster callback from work RAM.
+address = 0x00FF93
+targets = [0xC00522, 0xC00589, 0xC005E5, 0xC0A3DC]
+return_address = 0x00FF94
+
+[[stack_dispatches]]
+# The IRQ worker dispatches the queued match tasks on a separate stack.
+address = 0xC004F3
+targets = [0xC037D0]
+return_address = 0xC0048D
+reset_returns = true
+
+[[stack_dispatches]]
+# Returning from the scheduler IRQ restores the main thread's stack.
+address = 0xC00568
+targets = [0xC0017A]
+reset_returns = true
+
+[[indexed_jumps]]
+# Fighter animation records embed seven control commands.
+address = 0xC01CA2
+indices = [0, 2, 4, 6, 8, 10, 12]
+return_addresses = [0xC01BEC, 0xC01E0A]
+
+[[indexed_jumps]]
+# The video queue switches between the transfer commands used by these scenes.
+address = 0xC007D2
+indices = [0x06, 0x0C, 0x0E]
+return_address = 0xC007B8
+
+[[indexed_jumps]]
+# Jump movement advances through takeoff, flight, and landing.
+address = 0xC02A31
+indices = [0, 2, 4]
+
+[[indexed_jumps]]
+address = 0xC02AC1
+indices = [0, 2, 4, 6]
+
+[[indexed_jumps]]
+# Ranma's attack dispatches subsequent animation steps.
+address = 0xC02BAC
+indices = [0, 2, 4, 6]
+
+[[indexed_jumps]]
+address = 0xC02C76
+indices = [0, 2, 4, 6]
+
+[[indexed_jumps]]
+# The fighter state transitions use a shared condition table.
+address = 0xC03148
+indices = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28]
+
+[[indexed_jumps]]
+address = 0xC03268
+indices = [0, 2]
+
+[[indexed_jumps]]
+address = 0xC032EC
+indices = [0, 2]
+
+[[indexed_jumps]]
+address = 0xC0335A
+indices = [0, 2, 4]
+
+[[indexed_jumps]]
+# The fight selects its round result handler from the original dispatch table.
+address = 0xC0390B
+indices = [0, 2, 4]
+
+[[indexed_jumps]]
+# The title scene uses three driver-control callbacks.
+address = 0xD3C221
+indices = [0, 0x02, 0x10, 0x12]
+
+[[indexed_jumps]]
+# The title scene has two Start-button branches.
+address = 0xC0A1E5
+indices = [0, 2]
+
+[[indexed_jumps]]
+# Start dispatches to one handler for each title menu item.
+address = 0xC0A253
+indices = [0, 2, 4, 6]
+
+[[indexed_jumps]]
+# The 1P scripts load graphics and audio, schedule fades, and branch between scenes.
+address = 0xC0B33F
+indices = [8, 0x0A, 0x0E, 0x10, 0x14, 0x16, 0x1C, 0x1E, 0x20, 0x22]
+
+[[stack_dispatches]]
+# The 1P scripts invoke individual scene callbacks through a return address.
+address = 0xC0B46B
+targets = [0xC0B5F0, 0xC0B7F5, 0xC0B966, 0xC0B995, 0xC0BD8E]
+
+[[stack_dispatches]]
+# The 1P screen updates its short background callback and the long scheduler callbacks.
+address = 0xC0B5E8
+targets = [0xC09421]
+return_address = 0xC0B5E9
+
+[[stack_dispatches]]
+address = 0xC0B5DD
+targets = [0xC0204B, 0xC0206E, 0xC020D7, 0xC033CB, 0xC033EC]
+return_address = 0xC0B5E9
+
+[[stack_dispatches]]
+# The scheduler puts the first scene and its continuation on the guest stack.
+address = 0xC00173
+targets = [
+    0xC06229, 0xC06269, 0xC06303, 0xC067D3, 0xC06863, 0xC06872, 0xC06882, 0xC06893, 0xC078EE, 0xC079FE, 0xC07AA9,
+    0xC03434, 0xC0345B, 0xC036EC, 0xC065CD, 0xC06652, 0xC0665C, 0xC06666, 0xC06670, 0xC0667A,
+    0xC066DA, 0xC06776, 0xC06925, 0xC0692F, 0xC06949, 0xC06953, 0xC06979, 0xC06D0E, 0xC06D2C, 0xC06DDA,
+    0xC06E33, 0xC06E6B, 0xC07549, 0xC07606, 0xC07642, 0xC0769E, 0xC077F9, 0xC07AD4,
+    0xC09FD7, 0xC0A0FE, 0xC0A116,
+    0xC0A1BB, 0xC0A1DB, 0xC0A26C, 0xC0AF89, 0xC0B2A1, 0xC0B321, 0xC0B382, 0xC0B551, 0xC0B578,
+    0xC0B59D,
+]
+return_address = 0xC00174
+
+[[stack_dispatches]]
+# The two fighters run their state-specific update routines.
+address = 0xC00C74
+targets = [
+    0xC00F46, 0xC00F73, 0xC029AB, 0xC03D27, 0xC03D2F, 0xC03D37, 0xC03D63, 0xC03D6B, 0xC03D73, 0xC03D83,
+    0xC03D8B, 0xC03D93, 0xC03DE9,
+    0xC03E03, 0xC03E37, 0xC03E54, 0xC03E71, 0xC03E99, 0xC03EB6, 0xC03EC6,
+    0xC03EE1, 0xC03EFB, 0xC03F15,
+    0xC04B00, 0xC04B08, 0xC04B10, 0xC04B3C, 0xC04B44, 0xC04B4C, 0xC04B5C, 0xC04B64, 0xC04B6C, 0xC04B74, 0xC04B8E,
+    0xC04BA8, 0xC04BC2, 0xC04BF6, 0xC04C2D, 0xC04C4A, 0xC04C72, 0xC04C8F, 0xC04CA7, 0xC04CDF,
+]
+return_address = 0xC00C75
+
+[[stack_dispatches]]
+address = 0xC00C84
+targets = [
+    0xC00F46, 0xC029E4, 0xC03D2B, 0xC03D33, 0xC03D3B, 0xC03D67, 0xC03D6F, 0xC03D87, 0xC03D8F, 0xC03D97,
+    0xC03DFF, 0xC03E19, 0xC03E50, 0xC03E6D, 0xC03E8A, 0xC03EB2, 0xC03EBA, 0xC03ECA,
+    0xC03EF7, 0xC03F11, 0xC03F2B,
+    0xC04B04, 0xC04B0C, 0xC04B14, 0xC04B40, 0xC04B48, 0xC04B60, 0xC04B68, 0xC04B70, 0xC04B8A, 0xC04BA4,
+    0xC04BBE, 0xC04BD8, 0xC04C0C, 0xC04C46, 0xC04C63, 0xC04C8B, 0xC04C93, 0xC04CBD, 0xC04CF5,
+]
+return_address = 0xC00C85
+
+[[stack_dispatches]]
+# The CPU-controlled fighter selects a move variant using the game's random source.
+address = 0xC00F72
+targets = [0xC03DE9, 0xC04BA8, 0xC04BC2]
+
+[[stack_dispatches]]
+# The fighter animation reader resumes the appropriate sprite builder.
+address = 0xC01BA1
+targets = [0xC01BB5, 0xC01DD3]
+
+[[stack_dispatches]]
+# Akane's computer opponent dispatches actions from its script.
+address = 0xC0975D
+targets = [
+    0xC098AC, 0xC098AD, 0xC098AE, 0xC098B4, 0xC098BE, 0xC098D2, 0xC098EA, 0xC098F7,
+    0xC09911, 0xC09919, 0xC0992C, 0xC0993E, 0xC09950, 0xC09960, 0xC09970, 0xC09989, 0xC099B0,
+    0xC099D7, 0xC099E3, 0xC09A03, 0xC09A0F, 0xC09A2F, 0xC09A49, 0xC09A63, 0xC09A6C, 0xC09A83,
+    0xC09A8C, 0xC09AA3, 0xC09AC3, 0xC09AE3, 0xC09AF2, 0xC09AFC, 0xC09B03, 0xC09B21,
+    0xC09B42, 0xC09B63, 0xC09B6B, 0xC09B70,
+]
+return_address = 0xC0975E
+
+[[stack_dispatches]]
+# The match sequence schedules its gameplay and presentation tasks.
+address = 0xC09ECE
+targets = [0xC03434, 0xC036EC, 0xC066DA, 0xC06776]
+return_address = 0xC00174
+reset_returns = true
+
+[[stack_dispatches]]
+# This trampoline uses its own RTS as the return address for the movement callback.
+address = 0xC02974
+targets = [0xC029AB, 0xC02A26, 0xC02AAC, 0xC02B6E, 0xC02BA1, 0xC02C6B, 0xC04CC1, 0xC04CF9]
+return_address = 0xC02974
+allow_direct_return = true
+
+[[stack_dispatches]]
+address = 0xC02987
+targets = [0xC029E4, 0xC02A2C, 0xC02ABC, 0xC02B74, 0xC02BA7, 0xC02C71, 0xC04CC7, 0xC04D02]
+return_address = 0xC02987
+allow_direct_return = true
+
+[[stack_dispatches]]
+# The match setup runs each fighter's initial state callback.
+address = 0xC03065
+targets = [0xC03096, 0xC096A9]
+return_address = 0xC03066
+
+[[stack_dispatches]]
+address = 0xC03078
+targets = [0xC030AB, 0xC096D6]
+return_address = 0xC03079
+
+[[stack_dispatches]]
+# The selected arena supplies its per-frame presentation routine.
+address = 0xC083F8
+targets = [0xC08C3B]
+
+[[stack_dispatches]]
+# The arena loader runs the selected stage's setup callback.
+address = 0xC0833D
+targets = [0xC08C21]
+return_address = 0xC0916E
+
+[[stack_dispatches]]
+# The next 1P scene calls its graphics initializer through the scene table.
+address = 0xC079A7
+targets = [0xC07B02]
+return_address = 0xC079A8
+
+[[stack_dispatches]]
+# Cursor handlers depend on the active character-selection layout.
+address = 0xC07F5A
+targets = [0xC07F5F]
+return_address = 0xC07F5B
+
+[[stack_dispatches]]
+# The active attack schedules a temporary object in the match.
+address = 0xC02114
+targets = [0xC00F05]
+return_address = 0xC02115
+
+[[stack_dispatches]]
+address = 0xC02137
+targets = [0xC02FAD, 0xC02FD7, 0xC03007, 0xC03046, 0xC06FFA, 0xC07CDB]
+return_address = 0xC02138
+
+[[stack_dispatches]]
+address = 0xC07CE5
+targets = [0xC07D18]
+return_address = 0xC07CE6
+
+[[stack_dispatches]]
+# The first scene's graphics use encoding types 2, 3 and 4.
+address = 0xC058FB
+targets = [0xC05938, 0xC0602C, 0xC060AB]
+return_address = 0xC058FC
+
+[[stack_dispatches]]
+# The first two opening-scene tables select the same text and object dispatcher.
+address = 0xC0B229
+targets = [0xC0B195]
+return_address = 0xC0B22A
+
+[[stack_dispatches]]
+# Callback addresses read from the opening scene's two descriptor tables.
+address = 0xC0B1A4
+targets = [0xC0A85F, 0xC0A87E, 0xC0A950, 0xC0A8F5]
+return_address = 0xC0B1C6
+# The nested call loops over plain text records without callbacks.
+non_recursive = true

@@ -1,0 +1,54 @@
+# ROMs and local ROM selections
+/roms/
+*.sfc
+*.smc
+*.fig
+*.swc
+hard_battle_rom_path.txt
+hard_battle_title_graphic_rom_path.txt
+
+# Build trees and release output
+/build/
+/build-*/
+/cmake-build-*/
+/out/
+/dist/
+/src/generated/
+jusenkyo-hard-battle-builder-*.zip
+
+# CMake and Ninja output
+/CMakeUserPresets.json
+CMakeCache.txt
+CMakeFiles/
+CTestTestfile.cmake
+DartConfiguration.tcl
+cmake_install.cmake
+compile_commands.json
+install_manifest*.txt
+Testing/
+build.ninja
+.ninja_deps
+.ninja_log
+
+# Compiled files
+*.o
+*.obj
+*.a
+*.lib
+*.exe
+*.dll
+*.so
+*.dylib
+*.pdb
+*.ilk
+
+# Local development files
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,2 @@
+set(hard_battle_title_callback 0xC095D3)
+set(hard_battle_title_countdown 0x0080)
