@@ -29,6 +29,12 @@ target_compile_definitions(hard_battle PRIVATE
     HARD_BATTLE_TITLE_COUNTDOWN=${hard_battle_title_countdown})
 
 target_link_libraries(ramma_recomp PRIVATE hard_battle)
+get_property(hard_battle_multi_config GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
+if(hard_battle_multi_config)
+    # Multi-config generators put executables in per-config folders; give each its ROM selection.
+    file(GENERATE OUTPUT "$<TARGET_FILE_DIR:ramma_recomp>/hard_battle_rom_path.txt"
+        CONTENT "${RAMMA_HARD_BATTLE_ROM}\n")
+endif()
 target_compile_definitions(ramma_recomp PRIVATE RAMMA_HARD_BATTLE)
 
 if(WIN32)

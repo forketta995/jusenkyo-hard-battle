@@ -10,6 +10,13 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 # Export compile_commands.json (useful for IDEs and static analysis)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+if(MSVC)
+    # Link the C runtime statically, like the MinGW build's -static flags.
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    # The emulated machine and its frames live on the stack; the 1 MB MSVC default is too small for the tests.
+    add_link_options(/STACK:8388608)
+endif()
+
 add_subdirectory(third_party/snes_spc EXCLUDE_FROM_ALL)
 
 add_library(ramma_runtime STATIC
