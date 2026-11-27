@@ -17,8 +17,9 @@ editions and assets swapping are planned.
 
 ## Build and play
 
-On Windows, use Python 3.11 or later, CMake 3.20 or later, Ninja, and 64-bit MinGW-w64.
-Run the builder from a checkout or an extracted builder ZIP.
+On Windows, use Python 3.11 or later and either Visual Studio 2019 or later with
+the "Desktop development with C++" workload, or CMake 3.20 or later, Ninja and
+64-bit MinGW-w64. Run the builder from a checkout or an extracted builder ZIP.
 
 ```powershell
 python tools/build_hard_battle.py --rom 'C:\Games\Ranma Hard Battle (USA).sfc' --out 'build/preview-usa'

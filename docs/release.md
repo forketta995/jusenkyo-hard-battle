@@ -9,7 +9,8 @@ Proposed tag `v0.1.0-alpha.1`.
   Akane, with original stereo audio, pause, and Continue.
 - Optionally load the Japanese title graphic in the USA preview using a second
   local ROM.
-- Requires Python 3.11 or later, CMake 3.20 or later, Ninja, and 64-bit MinGW-w64.
+- Requires Python 3.11 or later and, on Windows, either Visual Studio 2019 or later
+  with the C++ workload or CMake 3.20 or later, Ninja, and 64-bit MinGW-w64.
   The builder is currently distributed as a ZIP of source and configuration.
 
 ## Package and verify
