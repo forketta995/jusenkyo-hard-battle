@@ -7,6 +7,7 @@ targets. Hard Battle is the first game linked to the runtime.
 | --- | --- |
 | `src/runtime/snes/` | 65C816 instructions and control flow, SNES bus and DMA, raster timing, PPU rendering, and SPC700 audio driver execution. |
 | `src/runtime/platform/win32/` | The preview window, keyboard input, frame pacing, drawing, and queued PCM playback. The game supplies the boot and frame callbacks. |
+| `src/runtime/platform/sdl3/` | The same preview host for macOS and Linux on SDL3, with gamepad input, frame capture and an optional scripted input mode. |
 | `src/runtime/games/hard_battle/` | Shared game entry points, ROM loading, boot diagnostics, and preview behavior. |
 | `src/runtime/rom_file.*` | Loading the ROM path and validating a local file against the expected length and CRC. |
 | `config/hard_battle_*/` | Per-edition ROM fingerprint, lift rules, and preview addresses. |

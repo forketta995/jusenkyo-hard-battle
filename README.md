@@ -28,6 +28,26 @@ Open `build/preview-usa/hard_battle_preview.exe`. Use Enter for Start, the
 arrow keys for movement, and Z and X for the SNES B and A buttons. Escape
 closes the preview. F5 returns to the startup sequence.
 
+### macOS and Linux (SDL3)
+
+Install CMake, Ninja, Python 3.11+ and SDL3 (`brew install cmake ninja sdl3`),
+then build with CMake directly:
+
+```sh
+cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DRAMMA_HARD_BATTLE_ROM="/path/to/Ranma 1-2 - Hard Battle (USA).sfc"
+cmake --build build
+./build/hard_battle_preview
+```
+
+The keyboard layout matches Windows. A gamepad also works: D-pad, Start,
+South for B, East for A, Back to restart. F12 saves the current frame as a
+BMP beside the executable. `cmake --install build --prefix <dir> --component
+HardBattlePreview` copies a self-contained preview folder.
+
+`SNES_PREVIEW_SCRIPT="frame:command;..."` drives the preview without a
+keyboard: a hex joypad mask held from that frame, `shot` to save the
+presented window, or `quit`.
+
 - [Local builder and requirements](docs/local-builder.md)
 - [Developer build and controls](docs/hard-battle-reset.md)
 - [Runtime architecture](docs/runtime-architecture.md)
