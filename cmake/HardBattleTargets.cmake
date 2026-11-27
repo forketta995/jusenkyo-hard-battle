@@ -43,6 +43,19 @@ if(WIN32)
         DESTINATION . COMPONENT HardBattlePreview)
     install(FILES "${PROJECT_SOURCE_DIR}/third_party/snes_spc/license.txt"
         DESTINATION . RENAME snes_spc-license.txt COMPONENT HardBattlePreview)
+elseif(TARGET ramma_snes_preview_sdl3)
+    add_executable(hard_battle_preview "${hard_battle_sources}/hard_battle_preview_sdl3.cpp")
+    target_link_libraries(hard_battle_preview PRIVATE hard_battle ramma_snes_preview_sdl3)
+    set_target_properties(hard_battle_preview PROPERTIES
+        BUILD_RPATH "$<TARGET_FILE_DIR:ramma_spc>"
+        INSTALL_RPATH "$<IF:$<PLATFORM_ID:Darwin>,@loader_path,$ORIGIN>")
+    install(TARGETS hard_battle_preview ramma_spc
+        RUNTIME DESTINATION . COMPONENT HardBattlePreview
+        LIBRARY DESTINATION . COMPONENT HardBattlePreview)
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/hard_battle_rom_path.txt"
+        DESTINATION . COMPONENT HardBattlePreview)
+    install(FILES "${PROJECT_SOURCE_DIR}/third_party/snes_spc/license.txt"
+        DESTINATION . RENAME snes_spc-license.txt COMPONENT HardBattlePreview)
 endif()
 
 if(BUILD_TESTING AND hard_battle_edition STREQUAL "hard_battle_usa")
